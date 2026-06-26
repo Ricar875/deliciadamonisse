@@ -245,3 +245,33 @@
     </ul>
   </div>
 </section>
+.bloco{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:22px;
+}
+
+.bloco-img{
+  width:180px;
+  max-width:40%;
+  height:auto;
+  border-radius:20px;
+  object-fit:cover;
+}
+
+.bloco-texto{
+  flex:1;
+}
+
+@media (max-width: 700px){
+  .bloco{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .bloco-img{
+    max-width:100%;
+    width:240px;
+  }
+}
