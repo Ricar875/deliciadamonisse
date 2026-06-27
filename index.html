@@ -1,1 +1,472 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delícias da Monise — Bolo no Pote & Salgados Artesanais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ====================================================================
+   CONFIG — edite aqui o que precisar (telefone, áreas de entrega, preços)
+   ==================================================================== */
+:root{
+  --bg:        #FBF1E7;   /* creme quente, fundo geral */
+  --bg-deep:   #3B1F2B;   /* vinho/ameixa escuro — rodapé e seções de contraste */
+  --ink:       #3A2218;   /* marrom cacau — texto principal */
+  --ink-soft:  #6B5246;   /* marrom mais claro — texto secundário */
+  --jam:       #B23A55;   /* vermelho-framboesa — destaque principal / CTA */
+  --jam-dark:  #8E2C43;
+  --honey:     #D9A02C;   /* mel/dourado — segundo destaque */
+  --cream-card:#FFFBF5;
+  --line:      rgba(58,34,24,0.12);
+  --shadow:    0 18px 40px -20px rgba(58,34,24,0.35);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Work Sans',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+h1,h2,h3{font-family:'Fraunces',serif;margin:0;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,241,231,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.headbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1080px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{
+  width:42px;height:42px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--honey), var(--jam) 70%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;color:#fff;font-weight:700;font-size:18px;
+  flex-shrink:0;
+}
+.brand-text h1{font-size:19px;color:var(--jam-dark);line-height:1.1;}
+.brand-text span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.cta-pill{
+  background:var(--jam);color:#fff;border-radius:999px;
+  padding:10px 18px;font-size:13px;font-weight:600;
+  display:flex;align-items:center;gap:7px;white-space:nowrap;
+  box-shadow:0 8px 18px -8px rgba(178,58,85,0.6);
+}
+.cta-pill svg{width:15px;height:15px;flex-shrink:0;}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;}
+.hero-img{width:100%;height:54vh;min-height:340px;object-fit:cover;}
+.hero-veil{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(58,31,43,0.05) 0%, rgba(58,31,43,0.15) 45%, rgba(58,31,43,0.92) 100%);
+}
+.hero-content{
+  position:absolute;left:0;right:0;bottom:0;padding:34px 20px 30px;
+  max-width:1080px;margin:0 auto;color:#fff;
+}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#F3C7CE;margin-bottom:10px;}
+.hero h2{font-size:clamp(30px,7vw,48px);line-height:1.04;font-weight:700;max-width:560px;}
+.hero p.lead{margin-top:12px;max-width:460px;color:#EDE0D8;font-size:15px;line-height:1.5;}
+.hero-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 22px;border-radius:999px;font-weight:600;font-size:14px;
+  border:none;cursor:pointer;
+}
+.btn-primary{background:var(--jam);color:#fff;box-shadow:0 10px 24px -10px rgba(178,58,85,0.7);}
+.btn-ghost{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.4);}
+.btn svg{width:16px;height:16px;}
+
+/* ---------- section scaffolding ---------- */
+section{padding:56px 0;}
+.section-head{max-width:560px;margin-bottom:32px;}
+.kicker{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--jam);margin-bottom:8px;display:block;}
+.section-head h2{font-size:clamp(26px,4vw,34px);color:var(--ink);line-height:1.1;}
+.section-head p{margin-top:10px;color:var(--ink-soft);font-size:15px;line-height:1.5;}
+
+/* ---------- jar-lid flavor badges (signature element) ---------- */
+.jar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+.jar-card{
+  background:var(--cream-card);border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  display:flex;flex-direction:column;
+}
+.jar-photo{position:relative;height:160px;overflow:hidden;background:#eee;}
+.jar-photo img{width:100%;height:100%;object-fit:cover;}
+.jar-swatch{height:160px;display:flex;align-items:center;justify-content:center;position:relative;}
+.jar-lid{
+  position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);
+  width:96px;height:96px;border-radius:50%;
+  background:var(--cream-card);
+  border:5px solid var(--cream-card);
+  box-shadow:0 6px 16px -6px rgba(0,0,0,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;
+  text-transform:uppercase;color:#fff;font-weight:700;text-align:center;
+}
+.jar-body{padding:42px 18px 20px;flex:1;display:flex;flex-direction:column;}
+.jar-body h3{font-size:18px;margin-bottom:6px;color:var(--ink);}
+.jar-body p{font-size:13.5px;color:var(--ink-soft);line-height:1.5;flex:1;}
+.jar-cta{
+  margin-top:14px;display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+  color:var(--jam-dark);text-transform:uppercase;letter-spacing:.04em;
+}
+.jar-cta svg{width:13px;height:13px;}
+
+/* ---------- photo feature cards (bolo / salgados) ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.feature-card{
+  background:var(--cream-card);border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+  display:flex;flex-direction:column;
+}
+.feature-img{height:200px;overflow:hidden;}
+.feature-img img{width:100%;height:100%;object-fit:cover;}
+.feature-body{padding:20px;display:flex;flex-direction:column;flex:1;}
+.feature-tag{font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--honey);margin-bottom:6px;}
+.feature-body h3{font-size:19px;margin-bottom:8px;}
+.feature-body p{font-size:14px;color:var(--ink-soft);line-height:1.5;flex:1;}
+.feature-price{
+  margin-top:14px;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px dashed var(--line);padding-top:14px;
+}
+.price{font-family:'Space Mono',monospace;font-weight:700;color:var(--jam-dark);font-size:15px;}
+.mini-btn{
+  background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;
+  font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;
+}
+.mini-btn svg{width:13px;height:13px;}
+
+/* ---------- salgados strip ---------- */
+.salgados-wrap{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:0;
+  border-radius:24px;overflow:hidden;box-shadow:var(--shadow);
+  background:var(--cream-card);
+}
+.salgados-img{min-height:280px;background-size:cover;background-position:center;}
+.salgados-body{padding:32px;}
+.salgados-body h3{font-size:24px;margin-bottom:10px;}
+.salgados-body p.intro{color:var(--ink-soft);font-size:14px;line-height:1.55;margin-bottom:18px;}
+.salgado-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:11px 0;border-bottom:1px solid var(--line);
+}
+.salgado-row:last-child{border-bottom:none;}
+.salgado-row .nm{font-weight:600;font-size:14.5px;}
+.salgado-row .ds{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px;font-weight:400;}
+.salgado-row .pr{font-family:'Space Mono',monospace;font-weight:700;color:var(--jam-dark);font-size:14px;white-space:nowrap;}
+
+@media (max-width:720px){
+  .salgados-wrap{grid-template-columns:1fr;}
+  .salgados-img{min-height:200px;}
+}
+
+/* ---------- delivery / info ---------- */
+.delivery{background:var(--bg-deep);color:#F4E9DE;}
+.delivery .section-head p{color:#D9C3B4;}
+.delivery .kicker{color:#E7AEBC;}
+.deliv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.deliv-card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+  border-radius:18px;padding:24px;
+}
+.deliv-card .ic{
+  width:42px;height:42px;border-radius:50%;background:rgba(217,160,44,0.18);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.deliv-card .ic svg{width:20px;height:20px;color:var(--honey);}
+.deliv-card h4{font-family:'Fraunces',serif;font-size:18px;margin-bottom:4px;color:#fff;}
+.deliv-card p{font-size:13.5px;color:#CDB6A6;line-height:1.5;}
+.deliv-note{
+  margin-top:24px;display:flex;gap:10px;align-items:flex-start;
+  font-size:13.5px;color:#E7CDBE;
+}
+.deliv-note svg{width:18px;height:18px;color:#E7AEBC;flex-shrink:0;margin-top:1px;}
+
+/* ---------- final cta ---------- */
+.final-cta{text-align:center;padding:64px 0;}
+.final-cta h2{font-size:clamp(26px,5vw,38px);margin-bottom:12px;}
+.final-cta p{color:var(--ink-soft);font-size:15px;max-width:420px;margin:0 auto 24px;}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#E9D9C9;padding:34px 0;text-align:center;font-size:13px;}
+footer .fname{font-family:'Fraunces',serif;font-size:17px;color:#fff;margin-bottom:4px;}
+footer .ftag{color:#C9AC97;margin-bottom:10px;display:block;}
+footer .fline{color:#A78C77;margin-top:14px;}
+footer .fline a{text-decoration:underline;}
+
+@media (max-width:560px){
+  .headbar{padding:12px 16px;}
+  .brand-text h1{font-size:16px;}
+  section{padding:40px 0;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div class="brand-text">
+        <h1>Delícias da Monise</h1>
+        <span>Sabor &amp; Tradição Artesanal</span>
+      </div>
+    </div>
+    <a class="cta-pill" id="wa-header" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.4 5.08L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.78 14.07c-.24.68-1.42 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.51-.1.19-.16.31-.31.48-.15.17-.32.38-.46.51-.15.14-.31.29-.13.57.18.29.8 1.32 1.72 2.13 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.05.18-.18.78-.9.99-1.21.21-.31.41-.25.69-.15.28.1 1.78.84 2.08 1 .3.15.5.23.57.36.07.13.07.74-.17 1.42z"/></svg>
+      (79) 99807-4890
+    </a>
+  </div>
+</header>
+
+<section class="hero" style="padding:0;">
+  <img class="hero-img" src="https://images.pexels.com/photos/19740635/pexels-photo-19740635.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mesa com salgados e doces brasileiros artesanais">
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Bolo no pote &amp; salgados de festa</span>
+    <h2>O sabor caseiro que vira pedido de novo na mesma semana.</h2>
+    <p class="lead">Recheios de colher, bolos artesanais e salgados feitos sob encomenda, com entrega em Aracaju e Nossa Senhora de Lourdes.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" id="wa-hero" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.4 5.08L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.78 14.07c-.24.68-1.42 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.51-.1.19-.16.31-.31.48-.15.17-.32.38-.46.51-.15.14-.31.29-.13.57.18.29.8 1.32 1.72 2.13 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.05.18-.18.78-.9.99-1.21.21-.31.41-.25.69-.15.28.1 1.78.84 2.08 1 .3.15.5.23.57.36.07.13.07.74-.17 1.42z"/></svg>
+        Fazer pedido agora
+      </a>
+      <a class="btn btn-ghost" href="#sabores">Ver sabores</a>
+    </div>
+  </div>
+</section>
+
+<section id="sabores">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Bolo no pote</span>
+      <h2>Recheios irresistíveis</h2>
+      <p>Cada potinho é montado em camadas — bolo fofinho, recheio generoso e cobertura. Escolha o sabor e chame no WhatsApp.</p>
+    </div>
+    <div class="jar-grid" id="jar-grid"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Para celebrar</span>
+      <h2>Bolo artesanal &amp; trufas</h2>
+      <p>Para aniversários, encontros ou só porque hoje merece um doce de verdade.</p>
+    </div>
+    <div class="feature-grid" id="feature-grid"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="salgados-wrap">
+      <div class="salgados-img" style="background-image:url('https://images.pexels.com/photos/18784886/pexels-photo-18784886.jpeg?auto=compress&cs=tinysrgb&w=1200');"></div>
+      <div class="salgados-body">
+        <span class="kicker">Para a festa</span>
+        <h3>Salgados feitos na hora</h3>
+        <p class="intro">Crocantes por fora, macios por dentro — vendidos por dúzia, perfeitos para reunir todo mundo.</p>
+        <div id="salgados-list"></div>
+        <a class="btn btn-primary" id="wa-salgados" href="#" target="_blank" rel="noopener" style="margin-top:18px;width:100%;justify-content:center;">
+          Encomendar salgados
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="delivery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Onde chega</span>
+      <h2>Informações de entrega</h2>
+      <p>Planeje seu pedido com antecedência — cada região tem seu dia certo.</p>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h13l3 5H3z"/><path d="M16 13V7H3v6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg></div>
+        <h4>Aracaju</h4>
+        <p>Entregas todas as quartas-feiras.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h13l3 5H3z"/><path d="M16 13V7H3v6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg></div>
+        <h4>Nossa Senhora de Lourdes</h4>
+        <p>Entregas todos os sábados.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1L21 3l-1.1 3.9A8.46 8.46 0 0 1 21 11.5z"/></svg></div>
+        <h4>Encomendas</h4>
+        <p>Para outras datas ou regiões, combine direto com antecedência via WhatsApp.</p>
+      </div>
+    </div>
+    <div class="deliv-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>Entrega por conta do cliente. Planeje seu pedido e receba o melhor sabor da região no conforto da sua casa.</span>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Bateu a vontade?</h2>
+    <p>Manda uma mensagem agora e já garante seu potinho ou sua dúzia de salgados.</p>
+    <a class="btn btn-primary" id="wa-final" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.4 5.08L2 22l5.2-1.36a9.9 9.9 0 0 0 4.84 1.24h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.78 14.07c-.24.68-1.42 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.51-.1.19-.16.31-.31.48-.15.17-.32.38-.46.51-.15.14-.31.29-.13.57.18.29.8 1.32 1.72 2.13 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.05.18-.18.78-.9.99-1.21.21-.31.41-.25.69-.15.28.1 1.78.84 2.08 1 .3.15.5.23.57.36.07.13.07.74-.17 1.42z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fname">Delícias da Monise</div>
+    <span class="ftag">Sabor &amp; Tradição Artesanal</span>
+    <div class="fline">© 2026 Delícias da Monise. Todos os direitos reservados. · WhatsApp: <a id="wa-footer" href="#" target="_blank" rel="noopener">(79) 99807-4890</a></div>
+  </div>
+</footer>
+
+<script>
+/* ====================================================================
+   CONFIG — produtos, preços e link do WhatsApp
+   Edite os valores abaixo para atualizar o site (preços são exemplo,
+   troque pelos valores reais).
+   ==================================================================== */
+const WHATS_NUMBER = "5579998074890"; // (79) 99807-4890 em formato internacional
+
+function waLink(message){
+  return "https://wa.me/" + WHATS_NUMBER + "?text=" + encodeURIComponent(message);
+}
+
+const flavors = [
+  {
+    nome:"Brigadeiro Gourmet",
+    desc:"O clássico brasileiro elevado a outro nível — chocolate de alta qualidade e textura aveludada.",
+    cor:"#5A3A2A",
+    foto:"https://images.pexels.com/photos/9285197/pexels-photo-9285197.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    nome:"Mousse de Maracujá",
+    desc:"O equilíbrio perfeito entre o doce e o cítrico, em textura leve e aerada.",
+    cor:"#D9A02C",
+    foto:"https://images.pexels.com/photos/5945951/pexels-photo-5945951.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    nome:"Mousse de Limão",
+    desc:"Refrescância pura em cada colherada — azedinho na medida certa.",
+    cor:"#A9B23E"
+  },
+  {
+    nome:"Beijinho Especial",
+    desc:"Coco ralado fresco com a cremosidade do leite condensado. Sabor suave e nostálgico.",
+    cor:"#E8DCC8"
+  },
+  {
+    nome:"Nutella Autêntica",
+    desc:"Para quem ama chocolate com avelã — o recheio mais pedido da casa.",
+    cor:"#5C3A21"
+  },
+  {
+    nome:"Casalinho",
+    desc:"A união perfeita entre brigadeiro preto e beijinho em um só pote.",
+    cor:"#B23A55"
+  }
+];
+
+const grid = document.getElementById('jar-grid');
+flavors.forEach(f=>{
+  const card = document.createElement('div');
+  card.className = 'jar-card';
+  const top = f.foto
+    ? `<div class="jar-photo"><img src="${f.foto}" alt="${f.nome}"></div>`
+    : `<div class="jar-swatch" style="background:${f.cor};"></div>`;
+  card.innerHTML = `
+    ${top}
+    <div class="jar-body">
+      <h3>${f.nome}</h3>
+      <p>${f.desc}</p>
+      <a class="jar-cta" target="_blank" rel="noopener" href="${waLink('Oi! Quero pedir um bolo no pote sabor ' + f.nome + '.')}">
+        Pedir este sabor
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>`;
+  grid.appendChild(card);
+});
+
+const features = [
+  {
+    tag:"Sob encomenda",
+    nome:"Bolo Artesanal",
+    desc:"Receitas tradicionais com ingredientes frescos. Perfeito para celebrações e momentos especiais com a família.",
+    preco:"a partir de R$ 45",
+    foto:"https://images.pexels.com/photos/25860505/pexels-photo-25860505.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    tag:"Caixinha de 6 ou 12",
+    nome:"Trufa Gourmet",
+    desc:"Cobertura de chocolate premium, sabor intenso e textura macia que derrete na boca.",
+    preco:"R$ 3,50 / unidade",
+    foto:"https://images.pexels.com/photos/9285186/pexels-photo-9285186.jpeg?auto=compress&cs=tinysrgb&w=800"
+  }
+];
+
+const fgrid = document.getElementById('feature-grid');
+features.forEach(f=>{
+  const card = document.createElement('div');
+  card.className = 'feature-card';
+  card.innerHTML = `
+    <div class="feature-img"><img src="${f.foto}" alt="${f.nome}"></div>
+    <div class="feature-body">
+      <span class="feature-tag">${f.tag}</span>
+      <h3>${f.nome}</h3>
+      <p>${f.desc}</p>
+      <div class="feature-price">
+        <span class="price">${f.preco}</span>
+        <a class="mini-btn" target="_blank" rel="noopener" href="${waLink('Oi! Quero pedir: ' + f.nome + '.')}">
+          Pedir agora
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>`;
+  fgrid.appendChild(card);
+});
+
+const salgados = [
+  {nome:"Coxinha", desc:"Frango desfiado, crocante por fora e macia por dentro.", preco:"R$ 65 /dz"},
+  {nome:"Cachorro Quente Especial", desc:"Pão macio com ingredientes selecionados.", preco:"R$ 70 /dz"},
+  {nome:"Pastel de Festa", desc:"Recheio generoso, perfeito para reuniões.", preco:"R$ 60 /dz"},
+  {nome:"Enroladinho", desc:"Macio e saboroso, ideal para qualquer ocasião.", preco:"R$ 55 /dz"}
+];
+const slist = document.getElementById('salgados-list');
+salgados.forEach(s=>{
+  const row = document.createElement('div');
+  row.className = 'salgado-row';
+  row.innerHTML = `
+    <span class="nm">${s.nome}<span class="ds">${s.desc}</span></span>
+    <span class="pr">${s.preco}</span>`;
+  slist.appendChild(row);
+});
+
+document.getElementById('wa-header').href  = waLink('Oi! Vi o cardápio da Delícias da Monise e quero fazer um pedido.');
+document.getElementById('wa-hero').href    = waLink('Oi! Vi o cardápio da Delícias da Monise e quero fazer um pedido.');
+document.getElementById('wa-salgados').href= waLink('Oi! Quero encomendar uma dúzia de salgados.');
+document.getElementById('wa-final').href   = waLink('Oi! Vi o cardápio da Delícias da Monise e quero fazer um pedido.');
+document.getElementById('wa-footer').href  = waLink('Oi! Vi o cardápio da Delícias da Monise e quero fazer um pedido.');
+</script>
+</body>
+</html>
